@@ -33,13 +33,15 @@ public class MyBatisTest {
     @Test
     public void TestFuzzySearch() throws IOException {
         SqlSession sqlSession=dataConn.getSqlSession();
-        sqlSession.selectList("test.findUserByUsername","丽");
-        User user=sqlSession.selectOne("test.findUserById",1);
-        System.out.println("姓名:"+user.getUsername());
-        System.out.println("性别:"+user.getGender());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("生日:"+sdf.format(user.getBirthday()));
-        System.out.println("所在地:"+user.getProvince()+user.getCity());
+        List<User> userList =  sqlSession.selectList("test.findUserByUsername","丽");
+        for (int i = 0;i < userList.size(); i++) {
+            User user = userList.get(i);
+            System.out.println("姓名:"+user.getUsername());
+            System.out.println("性别:"+user.getGender());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("生日:"+sdf.format(user.getBirthday()));
+            System.out.println("所在地:"+user.getProvince()+user.getCity());
+        }
         sqlSession.close();
     }
 }

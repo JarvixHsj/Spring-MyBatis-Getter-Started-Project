@@ -12,5 +12,8 @@
         SELECT * FROM USER WHERE username like '%${value}%'
     </select>
 
+    <insert id="insertUser" parameterType="cn.com.mybatis.po.User">
+    </insert>
+
 
 </mapper>

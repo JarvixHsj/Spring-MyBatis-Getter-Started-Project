@@ -6,7 +6,7 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.7.11)
-# Database: mybatis_test
+# Database: spring-mybatis-started-project
 # Generation Time: 2019-07-30 09:11:08 +0000
 # ************************************************************
 
