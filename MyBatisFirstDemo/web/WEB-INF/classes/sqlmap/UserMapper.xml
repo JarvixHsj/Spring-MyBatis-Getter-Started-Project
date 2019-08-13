@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="test">
-    <select id="findUserById" parameterType="int" resultType="cn.com.mybatis.po.User">
+    <select id="findUserById" parameterType="int" resultType="User">
         SELECT * FROM USER WHERE id=#{id}
     </select>
 
@@ -12,5 +12,56 @@
         SELECT * FROM USER WHERE username like '%${value}%'
     </select>
 
+    <insert id="insertUser" parameterType="cn.com.mybatis.po.User">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user (username, password, gender, email, province, city, birthday) VALUES (#{username}, #{password}, #{gender}, #{email}, #{province}, #{city}, #{birthday});
+    </insert>
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+
+    <update id="updateUserName" parameterType="cn.com.mybatis.po.User">
+        UPDATE user SET username = #{username} WHERE id = #{id}
+    </update>
+
+    <select id="findUserList" parameterType="cn.com.mybatis.po.UserQueryInfo" resultType="cn.com.mybatis.po.UserInstance">
+        SELECT * FROM user WHERE user.gender = #{userInstance.gender} AND user.username like '%${userInstance.username}%'
+    </select>
+
+    <select id="findBatchCustomer" resultType="cn.com.mybatis.po.BatchCustomer">
+        SELECT batch.*,customer.username,customer.acno FROM batch,customer WHERE batch.cus_id = customer.cus_id
+    </select>
+
+    <resultMap id="BatchInfoMap" type="cn.com.mybatis.po.BatchItem">
+        <id column="batch_id" property="batch_id"/>
+        <result column="cus_id" property="cus_id"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime" javaType="java.util.Date"/>
+        <result column="note" property="note"/>
+        <association property="customer" javaType="cn.com.mybatis.po.Customer">
+            <id column="cus_id" property="cus_id"></id>
+            <result column="username" property="username"></result>
+            <result column="acno" property="acno"></result>
+            <result column="gender" property="gender"></result>
+            <result column="phone" property="phone"></result>
+        </association>
+    </resultMap>
+
+
+    <resultMap id="BatchAndBatchDetailResultMap" type="cn.com.mybatis.po.BatchItem" extends="BatchInfoMap">
+        <collection property="batchdetail" ofType="cn.com.mybatis.po.BatchDetail">
+            <id column="id" property="id"></id>
+            <result column="batch_id" property="batch_id"></result>
+            <result column="product_id" property="product_id"></result>
+            <result column="product_num" property="product_num"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findBatchAndBatchDetail" resultMap="BatchAndBatchDetailResultMap">
+        SELECT batch.*,customer.username,customer.acno,batchdetail.product_id,batchdetail.product_num FROM batch,customer,batchdetail WHERE batch.cus_id = customer.cus_id and  batchdetail.batch_id = batch.batch_id
+    </select>
 
 </mapper>

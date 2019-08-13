@@ -3,9 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--引入配置文件，减少配置“硬编码”-->
+    <properties resource="db.properties">
+    </properties>
     <settings>
         <setting name="logImpl" value="LOG4J" />
     </settings>
+    <typeAliases>
+        <package name="cn.com.mybatis.po"></package>
+    </typeAliases>
     <!-- 和spring整合后 environments配置将废除-->
     <environments default="development">
         <environment id="development">
@@ -13,10 +19,15 @@
             <transactionManager type="JDBC" />
             <!-- 数据库连接池-->
             <dataSource type="POOLED">
-                <property name="driver" value="org.gjt.mm.mysql.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/spring-mybatis-started-project?characterEncoding=utf-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <!--<property name="driver" value="org.gjt.mm.mysql.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/spring-mybatis-started-project?characterEncoding=utf-8"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="root"/>-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${jurl}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+
             </dataSource>
         </environment>
     </environments>
