@@ -128,10 +128,53 @@ public class MyBatisTest {
         System.out.println("卡号为"+customer.getAcno()+"的名为"+ customer.getUsername()+"的客户：");
         System.out.println("于"+sdf.format(batchItem.getCreatetime())+"采购了批次号为"+batchItem.getNumber()+"的一批理财产品");
 
-        List<BatchDetail> batchDetails = batchItem.getBatchDetails();
+        List<BatchDetail> batchDetails = batchItem.getBatchDetail();
         for (int i = 0; i < batchDetails.size(); i++) {
             BatchDetail batchDetail = batchDetails.get(i);
             System.out.println("id为"+batchDetail.getProduct_id()+"的理财产品"+batchDetail.getProduct_num()+"份");
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void testFindUserAndProducts() throws Exception{
+        SqlSession session = dataConn.getSqlSession();
+        List<Customer> customerList = session.selectList("test.findUserAndProducts");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (int i = 0; i < customerList.size(); i++) {
+            Customer customer = customerList.get(i);
+            List<Batch> batchList = customer.getBatchList();
+            System.out.println("卡号为"+customer.getAcno()+"的名为"+ customer.getUsername()+"的客户：");
+
+            for (int j = 0; j < batchList.size(); j++) {
+                Batch batch = batchList.get(j);
+                System.out.println("于"+sdf.format(batch.getCreatetime())+"采购了批次号为"+batch.getNumber()+"的一批理财产品,详情如下：");
+                List<BatchDetail> batchDetails = batch.getBatchDetails();
+                for (int k = 0; k < batchDetails.size(); k++) {
+                    BatchDetail batchDetail = batchDetails.get(k);
+                    System.out.println("id为" + batchDetail.getProduct_id() + "的理财产品" + batchDetail.getProduct_num() + "份");
+                    System.out.println("该理财产品的信息为：");
+                    FinacialProduct finacialProduct = batchDetail.getFinacialProduct();
+                    System.out.println("产品名称：" + finacialProduct.getName() + "|产品价格：" + finacialProduct.getPrice() + "|产品简介：" + finacialProduct.getDetail());
+                }
+
+            }
+            System.out.println("********************************************");
+        }
+        session.close();
+    }
+
+    @Test
+    public void testFindBatchCustomerLazyLoading() throws Exception{
+        SqlSession sqlSession = dataConn.getSqlSession();
+        List<BatchItem> batchItems = sqlSession.selectList("test.findBatchCustomerLazyLoading");
+        BatchItem batchItem = null;
+        Customer customer = null;
+        for (int i = 0; i < batchItems.size(); i++) {
+            batchItem = batchItems.get(i);
+            System.out.println("订单编号："+ batchItem.getNumber());
+            customer = batchItem.getCustomer();
+            System.out.println("订购用户姓名：" + customer.getUsername());
         }
         sqlSession.close();
     }

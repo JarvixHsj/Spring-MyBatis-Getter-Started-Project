@@ -1,5 +1,7 @@
 package cn.com.mybatis.po;
 
+import java.util.List;
+
 /**
  * Created By xiaoweiping 2019/8/13 17:16
  **/
@@ -8,6 +10,17 @@ public class BatchDetail {
     private int batch_id;
     private int product_id;
     private int product_num;
+
+    private FinacialProduct finacialProduct;
+
+    public FinacialProduct getFinacialProduct() {
+        return finacialProduct;
+    }
+
+    public void setFinacialProduct(FinacialProduct finacialProduct) {
+        this.finacialProduct = finacialProduct;
+    }
+
 
     public int getId() {
         return id;

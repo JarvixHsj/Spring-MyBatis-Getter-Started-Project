@@ -8,6 +8,8 @@
     </properties>
     <settings>
         <setting name="logImpl" value="LOG4J" />
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
     <typeAliases>
         <package name="cn.com.mybatis.po"></package>

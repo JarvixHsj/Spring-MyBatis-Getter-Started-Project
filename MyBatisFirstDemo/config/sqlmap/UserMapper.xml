@@ -64,4 +64,67 @@
         SELECT batch.*,customer.username,customer.acno,batchdetail.product_id,batchdetail.product_num FROM batch,customer,batchdetail WHERE batch.cus_id = customer.cus_id and  batchdetail.batch_id = batch.batch_id
     </select>
 
+    <resultMap id="UserAndProductsResultMap" type="cn.com.mybatis.po.Customer">
+        <result column="username" property="username"/>
+        <result column="acno" property="acno"/>
+        <collection property="batchList" ofType="cn.com.mybatis.po.Batch">
+            <id column="batch_id" property="batch_id"/>
+            <result column="cus_id" property="cus_id"/>
+            <result column="number" property="number"/>
+            <result column="createtime" property="createtime" javaType="java.util.Date"/>
+            <result column="note" property="note"/>
+            <collection property="batchDetails" ofType="cn.com.mybatis.po.BatchDetail">
+                <id column="id" property="id"/>
+                <result column="batch_id" property="batch_id"/>
+                <result column="product_id" property="product_id"/>
+                <result column="product_num" property="product_num"/>
+                <association property="finacialProduct" javaType="cn.com.mybatis.po.FinacialProduct">
+                    <id column="product_id" property="product_id"/>
+                    <result column="name" property="name"/>
+                    <result column="detail" property="detail"/>
+                    <result column="price" property="price"/>
+                </association>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findUserAndProducts" resultMap="UserAndProductsResultMap">
+        SELECT
+            batch.*, customer.username,
+            customer.acno,
+            batchdetail.product_id,
+            batchdetail.product_num,
+            finacial_products.`name`,
+            finacial_products.detail,
+            finacial_products.price
+        FROM
+            batch,
+            customer,
+            batchdetail,
+            finacial_products
+        WHERE
+            batch.cus_id = customer.cus_id
+        AND batchdetail.batch_id = batch.batch_id
+        AND finacial_products.product_id = batchdetail.product_id
+    </select>
+
+    <!--延迟加载示例-->
+    <select id="findBatchCustomerLazyLoading" resultMap="BatchCustomerLazyLoading">
+        SELECT * FROM batch
+    </select>
+    <!--延迟加载 map-->
+    <resultMap id="BatchCustomerLazyLoading" type="cn.com.mybatis.po.BatchItem">
+        <id column="batch_id" property="batch_id"/>
+        <result column="cus_id" property="cus_id"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime" javaType="java.util.Date"/>
+        <result column="note" property="note"/>
+        <association property="customer" javaType="cn.com.mybatis.po.Customer" select="findCustomerById" column="cus_id">
+        </association>
+    </resultMap>
+    <!--延迟加载 按需执行的select-->
+    <select id="findCustomerById" parameterType="int" resultType="cn.com.mybatis.po.Customer">
+        SELECT * FROM customer WHERE cus_id = #{id}
+    </select>
+
 </mapper>

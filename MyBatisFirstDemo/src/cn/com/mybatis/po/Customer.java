@@ -1,5 +1,7 @@
 package cn.com.mybatis.po;
 
+import java.util.List;
+
 /**
  * Created By xiaoweiping 2019/8/13 17:28
  **/
@@ -9,6 +11,17 @@ public class Customer {
     private String acno;
     private String gender;
     private String phone;
+
+    private List<Batch> batchList;
+
+
+    public List<Batch> getBatchList() {
+        return batchList;
+    }
+
+    public void setBatchList(List<Batch> batchList) {
+        this.batchList = batchList;
+    }
 
     public int getCus_id() {
         return cus_id;

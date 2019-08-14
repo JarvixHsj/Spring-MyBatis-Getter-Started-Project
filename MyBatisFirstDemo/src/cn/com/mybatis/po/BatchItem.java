@@ -13,7 +13,7 @@ public class BatchItem  {
     private Date createtime;
     private String note;
     private Customer customer;
-    private List<BatchDetail> batchdetails;
+    private List<BatchDetail> batchdetail;
 
     public Customer getCustomer() {
         return customer;
@@ -23,12 +23,12 @@ public class BatchItem  {
         this.customer = customer;
     }
 
-    public List<BatchDetail> getBatchDetails() {
-        return batchdetails;
+    public List<BatchDetail> getBatchDetail() {
+        return batchdetail;
     }
 
-    public void setBatchDetails(List<BatchDetail> batchDetails) {
-        this.batchdetails = batchDetails;
+    public void setBatchDetail(List<BatchDetail> batchDetail) {
+        this.batchdetail = batchDetail;
     }
 
 

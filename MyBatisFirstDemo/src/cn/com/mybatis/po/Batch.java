@@ -1,6 +1,7 @@
 package cn.com.mybatis.po;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created By xiaoweiping 2019/8/13 16:17
@@ -11,6 +12,17 @@ public class Batch {
     private String number;
     private Date createtime;
     private String note;
+
+    private List<BatchDetail> batchDetails;
+
+    public List<BatchDetail> getBatchDetails() {
+        return batchDetails;
+    }
+
+    public void setBatchDetails(List<BatchDetail> batchDetails) {
+        this.batchDetails = batchDetails;
+    }
+
 
     public int getBatch_id() {
         return batch_id;
