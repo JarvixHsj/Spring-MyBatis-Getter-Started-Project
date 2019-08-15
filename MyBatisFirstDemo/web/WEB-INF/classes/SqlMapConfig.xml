@@ -8,7 +8,9 @@
     </properties>
     <settings>
         <setting name="logImpl" value="LOG4J" />
+        <!--打开延迟加载开关-->
         <setting name="lazyLoadingEnabled" value="true"/>
+        <!--将积极加载改为消极加载（即按需加载）-->
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
     <typeAliases>
@@ -35,5 +37,6 @@
     </environments>
     <mappers>
         <mapper resource="sqlmap/UserMapper.xml"/>
+        <mapper resource="sqlmap/CustomerMapper.xml"/>
     </mappers>
 </configuration>

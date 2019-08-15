@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import cn.com.mybatis.mapper.CustomerMapper;
 import cn.com.mybatis.po.*;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -176,6 +177,16 @@ public class MyBatisTest {
             customer = batchItem.getCustomer();
             System.out.println("订购用户姓名：" + customer.getUsername());
         }
+        sqlSession.close();
+    }
+
+    @Test
+    public void testFindCustomerById() throws Exception{
+        SqlSession sqlSession = dataConn.getSqlSession();
+        CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+        Customer customer  = customerMapper.findCustomerById(1);
+        System.out.println("用户姓名：" + customer.getUsername() + "，卡号："+ customer.getAcno());
+
         sqlSession.close();
     }
 }
