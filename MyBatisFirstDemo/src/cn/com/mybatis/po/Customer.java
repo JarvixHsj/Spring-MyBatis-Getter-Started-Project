@@ -1,11 +1,12 @@
 package cn.com.mybatis.po;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created By xiaoweiping 2019/8/13 17:28
  **/
-public class Customer {
+public class Customer implements Serializable {
     private int cus_id;
     private String username;
     private String acno;

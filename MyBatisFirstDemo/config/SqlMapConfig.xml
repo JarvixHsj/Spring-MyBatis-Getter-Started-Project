@@ -12,6 +12,9 @@
         <setting name="lazyLoadingEnabled" value="true"/>
         <!--将积极加载改为消极加载（即按需加载）-->
         <setting name="aggressiveLazyLoading" value="false"/>
+
+        <!--开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
     <typeAliases>
         <package name="cn.com.mybatis.po"></package>
