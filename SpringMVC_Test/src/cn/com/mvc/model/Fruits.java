@@ -28,6 +28,16 @@ public class Fruits {
         this.producing_area = producing_area;
     }
 
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String name;
     private double price;
     private String producing_area;

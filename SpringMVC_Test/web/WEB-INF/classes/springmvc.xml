@@ -20,9 +20,9 @@
     <!-- 处理器映射器 -->
      <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />-->
 
-     <bean class="cn.com.mvc.controller.FruitsControllerTest3"></bean>
+     <!--<bean class="cn.com.mvc.controller.FruitsControllerTest3"></bean>-->
 
-    <!--<context:component-scan base-package="cn.com.mvc.controller"></context:component-scan>-->
+    <context:component-scan base-package="cn.com.mvc.controller"></context:component-scan>
 
     <!--<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
         <!--<property name="interceptors">-->
@@ -53,23 +53,23 @@
             <!--</props>-->
         <!--</property>-->
     <!--</bean>-->
-    <!--&lt;!&ndash;<bean id="fruitsController" class="cn.com.mvc.controller.FruitsControllerTest" />&ndash;&gt;-->
-    <!--&lt;!&ndash;<bean id="fruitsController" class="cn.com.mvc.controller.FruitsControllerTest2" />&ndash;&gt;-->
-
-    <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>-->
     <!--<bean id="fruitsController" class="cn.com.mvc.controller.FruitsControllerTest" />-->
     <!--<bean id="fruitsController2" class="cn.com.mvc.controller.FruitsControllerTest2" />-->
     <!--<bean id="fruitsControllerJson2" class="cn.com.mvc.controller.FruitsControllerJsonTest2" />-->
 
+    <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>-->
+    <!--<bean id="fruitsController" class="cn.com.mvc.controller.FruitsControllerTest" />-->
+    <!--<bean id="fruitsController2" class="cn.com.mvc.controller.FruitsControllerTest2" />-->
+
     <!-- 处理器适配器 -->
      <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />-->
-     <!--<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>-->
+     <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
 
     <!-- 视图解析器 -->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="prefix" value="/WEB-INF/jsp"/>-->
-        <!--<property name="suffix" value=".jsp"></property>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp"/>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
 
     <!-- 注解映射器 -->
      <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>

@@ -46,4 +46,21 @@ class FruitsService{
         fruitsList.add(Banana);
         return fruitsList;
     }
+
+    public List<Fruits> queryFruitsByConditionList(Fruits fruits) {
+        List<Fruits> fruitsList = new ArrayList<>();
+        Fruits apple = new Fruits();
+        apple.setName("苹果");
+        apple.setPrice(2.3);
+        apple.setProducing_area("山东");
+
+        Fruits Banana = new Fruits();
+        Banana.setName("香蕉");
+        Banana.setPrice(1.5);
+        Banana.setProducing_area("上海");
+
+        fruitsList.add(apple);
+        fruitsList.add(Banana);
+        return fruitsList;
+    }
 }
