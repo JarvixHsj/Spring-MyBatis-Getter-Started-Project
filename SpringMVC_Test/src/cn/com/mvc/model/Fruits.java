@@ -1,9 +1,19 @@
 package cn.com.mvc.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 /**
  * Created By xiaoweiping 2019/9/4 15:45
  **/
 public class Fruits {
+    private int id;
+    @Size(min = 1,max = 2,message = "fruits.name.length.error")
+    private String name;
+    private double price;
+    @NotEmpty(message = "fruits.producing_area.isEmpty")
+    private String producing_area;
+
     public String getName() {
         return name;
     }
@@ -28,7 +38,7 @@ public class Fruits {
         this.producing_area = producing_area;
     }
 
-    private int id;
+
 
     public int getId() {
         return id;
@@ -38,7 +48,4 @@ public class Fruits {
         this.id = id;
     }
 
-    private String name;
-    private double price;
-    private String producing_area;
 }

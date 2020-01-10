@@ -10,5 +10,5 @@ public interface FruitsService {
 
     public Fruits queryFruitById(Integer id);
 
-    public List<Fruits> queryFruitsByCondition(Fruits fruits) throws UnsupportedEncodingException;
+    public List<Fruits> queryFruitsByCondition(Fruits fruits);
 }

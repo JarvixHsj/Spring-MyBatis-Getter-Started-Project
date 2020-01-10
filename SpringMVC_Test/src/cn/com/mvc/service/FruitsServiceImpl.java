@@ -45,7 +45,7 @@ public class FruitsServiceImpl implements FruitsService {
     }
 
     @Override
-    public List<Fruits> queryFruitsByCondition(Fruits fruits) throws UnsupportedEncodingException {
+    public List<Fruits> queryFruitsByCondition(Fruits fruits) {
         init();
         String name = fruits.getName();
         String area = fruits.getProducing_area();
