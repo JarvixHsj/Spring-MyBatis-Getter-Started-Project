@@ -9,7 +9,7 @@
     <title>水果列表</title>
 </head>
 <body>
-<form action="queryFruitsByCondition.action" method="post">
+<form action="queryFruitsByCondition.action" method="post" modelAttribute="fruits">
     名称：<input type="text" name="name" />&nbsp;&nbsp;
     产地：<input type="text" name="producing_area">
     <input type="submit" value="搜索">
@@ -31,4 +31,5 @@
     </c:forEach>
 </table>
 </body>
+
 </html>

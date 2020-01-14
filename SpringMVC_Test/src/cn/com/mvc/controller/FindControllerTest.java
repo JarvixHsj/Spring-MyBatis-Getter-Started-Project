@@ -9,13 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * Created By xiaoweiping 2019/9/23 17:28
  **/
+@Validated
 @Component
 @Controller
 @RequestMapping("query")
@@ -24,7 +28,7 @@ public class FindControllerTest {
     private FruitsService fruitsService = new FruitsServiceImpl();
 
     @RequestMapping("queryFruitsByCondition")
-    public String queryFruitsByCondition(Model model, @Validated Fruits fruits, BindingResult bindingResult) {
+    public String queryFruitsByCondition(@ModelAttribute("fruits") @Validated Fruits fruits, BindingResult bindingResult) {
         List<ObjectError> allError = null;
         if (bindingResult.hasErrors()){
             allError = bindingResult.getAllErrors();
@@ -44,7 +48,7 @@ public class FindControllerTest {
             findList = fruitsService.queryFruitsByCondition(fruits);
         }
         //将model数据传到页面
-        model.addAttribute("fruitsList",findList);
+//        model.addAttribute("fruitsList",findList);
         return "/fruits/findFruits";
     }
 }

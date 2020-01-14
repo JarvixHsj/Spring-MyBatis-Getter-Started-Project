@@ -1,6 +1,9 @@
 package cn.com.mvc.model;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -8,10 +11,10 @@ import javax.validation.constraints.Size;
  **/
 public class Fruits {
     private int id;
-    @Size(min = 1,max = 2,message = "fruits.name.length.error")
+    @Length(min = 1,max = 2,message = "fruits.name.length.error")
     private String name;
     private double price;
-    @NotEmpty(message = "fruits.producing_area.isEmpty")
+    @NotNull(message = "fruits.producing_area.isEmpty")
     private String producing_area;
 
     public String getName() {
